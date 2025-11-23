@@ -197,22 +197,41 @@
 
         <!-- Chart Section -->
         <div class="mt-5 chart-container">
-            <h4 class="text-center fw-bold text-success mb-3">📊 Yield Analysis Chart</h4>
-            <canvas id="yieldChart"></canvas>
+            <h4 class="text-center fw-bold text-success mb-3">📊 Yield Comparison</h4>
+            <canvas id="yieldCompareChart"></canvas>
         </div>
 
         <script>
-            var ctx = document.getElementById('yieldChart').getContext('2d');
+            var ctx = document.getElementById('yieldCompareChart').getContext('2d');
             new Chart(ctx, {
-                type: 'pie',
+                type: 'bar',
                 data: {
-                    labels: ['Predicted Yield', 'Remaining Potential'],
+                    labels: ['Before Recommendations', 'After Recommendations'],
                     datasets: [{
-                        data: [@ViewBag.YieldValue, 7 - @ViewBag.YieldValue], // you can adjust max range
-                        backgroundColor: ['#4caf50', '#c8e6c9']
+                        label: 'Yield (tons/hectare)',
+                        data: [@ViewBag.YieldValue, @ViewBag.ImprovedYield],
+                        backgroundColor: [
+                            '#4caf50',
+                            '#ffa726'
+                        ],
+                        borderColor: [
+                            '#388e3c',
+                            '#fb8c00'
+                        ],
+                        borderWidth: 2
                     }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
                 }
             });
         </script>
+
     }
 </div>

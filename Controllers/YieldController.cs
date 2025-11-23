@@ -29,22 +29,25 @@ namespace Frontend.Controllers
             if (!ModelState.IsValid)
                 return View(input);
 
-            // 1. predict yield
+            // 1. Actual model prediction
             double predictedYield = await _predictor.PredictYieldAsync(input);
 
-            // 2. return formatted result
             ViewBag.PredictedYield = $"{predictedYield:F2} tons/hectare";
+            ViewBag.YieldValue = predictedYield;
 
-            // 3. category (Good/Moderate/Low)
+            // 2. Yield after recommendations
+            double improvedYield = _advisor.GetImprovedYield(predictedYield, input);
+            ViewBag.ImprovedYield = improvedYield;
+
+            // Categories
             ViewBag.YieldCategory = _advisor.GetYieldCategory(predictedYield);
 
-            // 4. recommendations
-            ViewBag.Recommendations = _advisor.GetRecommendations(input);
+            // Textual Recommendations
+            ViewBag.Recommendations = _advisor.GetRecommendations(input, predictedYield);
 
-            // 5. for chart
-            ViewBag.YieldValue = predictedYield;
 
             return View(input);
         }
+
     }
 }
