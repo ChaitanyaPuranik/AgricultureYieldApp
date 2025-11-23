@@ -1,59 +1,91 @@
 ﻿@{
-    ViewData["Title"] = "Crop Yield Prediction";
+    ViewData["Title"] = "AgriYield Pro – Smart Crop Yield Prediction";
 }
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 
+<style>
+    /* Hero Section Gradient Background */
+    .hero-section {
+        background: linear-gradient(135deg, #dfffe2 0%, #fff8d1 100%);
+        border-radius: 25px;
+    }
+
+    .feature-card {
+        transition: transform 0.2s ease;
+    }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+</style>
+
 <div class="container mt-5">
 
     <!-- Hero Section -->
-    <div class="p-5 mb-4 bg-light rounded-4 shadow-sm">
+    <div class="p-5 mb-4 hero-section shadow-sm">
         <div class="container-fluid py-5">
-            <h1 class="display-4 fw-bold">Smart Agriculture Yield Predictor</h1>
-            <p class="col-md-8 fs-5 mt-3">
-                Our AI-powered system helps farmers estimate crop yield based on real agricultural data including
-                soil type, region, temperature, irrigation, fertilizer usage, and weather conditions.
-            </p>
-            <a href="/Yield/Predict" class="btn btn-primary btn-lg mt-3">
-                Start Prediction
-            </a>
+            <div class="row align-items-center">
+
+                <!-- Text -->
+                <div class="col-md-7">
+                    <h1 class="display-4 fw-bold text-success">FarmPredict AI</h1>
+                    <p class="fs-5 mt-3">
+                        Boost your agricultural planning with AI-driven crop yield prediction.
+                        Our system analyzes soil type, region, rainfall, temperature, fertilizer usage,
+                        and weather conditions to help you make smarter farming decisions.
+                    </p>
+                    <a href="/Yield/Predict" class="btn btn-success btn-lg mt-3 px-4 py-2">
+                        🌾 Start Prediction
+                    </a>
+                </div>
+
+                <!-- Illustration -->
+                <div class="col-md-5 text-center">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2903/2903466.png"
+                         width="230" class="img-fluid" />
+                </div>
+
+            </div>
         </div>
     </div>
 
     <!-- Features Section -->
     <div class="row text-center mt-5">
+
         <div class="col-md-4 mb-4">
-            <div class="p-4 bg-white shadow-sm rounded-4 h-100">
-                <img src="https://cdn-icons-png.flaticon.com/512/2906/2906387.png" width="60" class="mb-3" />
-                <h5 class="fw-bold">AI-Powered Insights</h5>
-                <p>Predict crop yield using advanced machine learning models trained on real agricultural data.</p>
+            <div class="p-4 bg-white shadow feature-card rounded-4 h-100">
+                <img src="https://cdn-icons-png.flaticon.com/512/785/785822.png" width="70" class="mb-3" />
+                <h5 class="fw-bold text-success">AI-Powered Insights</h5>
+                <p>Predict crop yield using advanced machine learning models trained on real-world farm data.</p>
             </div>
         </div>
 
         <div class="col-md-4 mb-4">
-            <div class="p-4 bg-white shadow-sm rounded-4 h-100">
-                <img src="https://cdn-icons-png.flaticon.com/512/4149/4149678.png" width="60" class="mb-3" />
-                <h5 class="fw-bold">Farmer-Friendly</h5>
-                <p>Easy-to-use interface that helps farmers make informed decisions before crop planning.</p>
+            <div class="p-4 bg-white shadow feature-card rounded-4 h-100">
+                <img src="https://cdn-icons-png.flaticon.com/512/2903/2903483.png" width="70" class="mb-3" />
+                <h5 class="fw-bold text-success">Farmer-Friendly</h5>
+                <p>Simple and intuitive interface designed to assist farmers in quick and accurate predictions.</p>
             </div>
         </div>
 
         <div class="col-md-4 mb-4">
-            <div class="p-4 bg-white shadow-sm rounded-4 h-100">
-                <img src="https://cdn-icons-png.flaticon.com/512/3208/3208789.png" width="60" class="mb-3" />
-                <h5 class="fw-bold">Fast Predictions</h5>
-                <p>Get accurate results instantly after entering your farm details.</p>
+            <div class="p-4 bg-white shadow feature-card rounded-4 h-100">
+                <img src="https://cdn-icons-png.flaticon.com/512/5951/5951655.png" width="70" class="mb-3" />
+                <h5 class="fw-bold text-success">Fast Predictions</h5>
+                <p>Get yield results instantly after entering your farm and environmental data.</p>
             </div>
         </div>
+
     </div>
 
     <!-- CTA Section -->
     <div class="text-center mt-5 mb-5">
-        <h2 class="fw-bold">Ready to Predict Your Crop Yield?</h2>
-        <p class="fs-5 text-muted">Just enter your farm details and our AI model will do the rest.</p>
+        <h2 class="fw-bold text-success">Ready to Predict Your Crop Yield?</h2>
+        <p class="fs-5 text-muted">Just enter your farm details and let FarmPredict AI guide your harvest potential.</p>
 
-        <a href="/Yield/Predict" class="btn btn-success btn-lg px-5 py-3 shadow-sm">
-            Predict Now
+        <a href="/Yield/Predict" class="btn btn-warning btn-lg px-5 py-3 shadow-sm">
+            🌱 Predict Now
         </a>
     </div>
 </div>
