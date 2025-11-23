@@ -5,6 +5,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient<YieldPredictionService>();
+builder.Services.AddScoped<YieldRecommendationService>();
+
 
 
 var app = builder.Build();

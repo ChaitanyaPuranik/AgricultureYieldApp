@@ -4,36 +4,70 @@
 }
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+    .hero-card {
+        background: linear-gradient(135deg, #e7ffe7 0%, #fffce0 100%);
+        border-radius: 20px;
+        padding: 30px;
+    }
+
+    .feature-icon {
+        width: 35px;
+        margin-right: 8px;
+    }
+
+    .result-card {
+        background: #ffffff;
+        border-left: 8px solid #4caf50;
+    }
+
+    .recommend-card {
+        background: #f8fff4;
+        border-left: 6px solid #99ca3c;
+        border-radius: 12px;
+        padding: 18px;
+    }
+
+    .chart-container {
+        max-width: 550px;
+        margin: auto;
+    }
+</style>
 
 <div class="container mt-5">
 
-    <!-- Page Title -->
+    <!-- Page Header -->
     <div class="text-center mb-4">
-        <h1 class="fw-bold">Crop Yield Prediction</h1>
-        <p class="text-muted fs-5">Provide your farm details to estimate expected yield.</p>
+        <h1 class="fw-bold text-success">🌾 Predict Your Crop Yield</h1>
+        <p class="text-muted fs-5">Enter your farm details and let our AI estimate your expected yield.</p>
     </div>
 
-    <!-- Prediction Form Card -->
+    <!-- Form Card -->
     <div class="card shadow-lg p-4 rounded-4">
 
         <form asp-action="Predict" method="post">
-
             <div class="row g-4">
 
                 <!-- Region -->
                 <div class="col-md-6">
-                    <label class="form-label fw-semibold">Region</label>
+                    <label class="form-label fw-semibold">
+                        <img src="https://cdn-icons-png.flaticon.com/512/535/535239.png" class="feature-icon" /> Region
+                    </label>
                     <select asp-for="Region" class="form-select">
-                        <option value="North">North</option>
-                        <option value="South">South</option>
-                        <option value="East">East</option>
-                        <option value="West">West</option>
+                        <option>North</option>
+                        <option>South</option>
+                        <option>East</option>
+                        <option>West</option>
                     </select>
                 </div>
 
                 <!-- Soil Type -->
                 <div class="col-md-6">
-                    <label class="form-label fw-semibold">Soil Type</label>
+                    <label class="form-label fw-semibold">
+                        <img src="https://cdn-icons-png.flaticon.com/512/10257/10257870.png" class="feature-icon" /> Soil Type
+                    </label>
                     <select asp-for="Soil_Type" class="form-select">
                         <option>Clay</option>
                         <option>Sandy</option>
@@ -46,7 +80,9 @@
 
                 <!-- Crop -->
                 <div class="col-md-6">
-                    <label class="form-label fw-semibold">Crop</label>
+                    <label class="form-label fw-semibold">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3208/3208789.png" class="feature-icon" /> Crop
+                    </label>
                     <select asp-for="Crop" class="form-select">
                         <option>Wheat</option>
                         <option>Rice</option>
@@ -59,19 +95,28 @@
 
                 <!-- Rainfall -->
                 <div class="col-md-6">
-                    <label class="form-label fw-semibold">Rainfall (mm)</label>
+                    <label class="form-label fw-semibold">
+                        <img src="https://cdn-icons-png.flaticon.com/512/4150/4150897.png"
+                             class="feature-icon" /> Rainfall (mm)
+                    </label>
                     <input asp-for="Rainfall_mm" class="form-control" type="number" placeholder="Enter rainfall amount" />
                 </div>
 
                 <!-- Temperature -->
                 <div class="col-md-6">
-                    <label class="form-label fw-semibold">Temperature (°C)</label>
-                    <input asp-for="Temperature_Celsius" class="form-control" type="number" placeholder="Enter average temperature" />
+                    <label class="form-label fw-semibold">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1684/1684360.png"
+                             class="feature-icon" /> Temperature (°C)
+                    </label>
+                    <input asp-for="Temperature_Celsius" class="form-control" type="number" placeholder="Enter temperature" />
                 </div>
 
-                <!-- Fertilizer Used -->
+                <!-- Fertilizer -->
                 <div class="col-md-6">
-                    <label class="form-label fw-semibold">Fertilizer Used</label>
+                    <label class="form-label fw-semibold">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2906/2906387.png"
+                             class="feature-icon" /> Fertilizer Used
+                    </label>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" asp-for="Fertilizer_Used" value="true" checked />
                         <label class="form-check-label">Yes</label>
@@ -82,9 +127,12 @@
                     </div>
                 </div>
 
-                <!-- Irrigation Used -->
+                <!-- Irrigation -->
                 <div class="col-md-6">
-                    <label class="form-label fw-semibold">Irrigation Used</label>
+                    <label class="form-label fw-semibold">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2904/2904961.png"
+                             class="feature-icon" /> Irrigation Used
+                    </label>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" asp-for="Irrigation_Used" value="true" checked />
                         <label class="form-check-label">Yes</label>
@@ -95,9 +143,12 @@
                     </div>
                 </div>
 
-                <!-- Weather Condition -->
+                <!-- Weather -->
                 <div class="col-md-6">
-                    <label class="form-label fw-semibold">Weather Condition</label>
+                    <label class="form-label fw-semibold">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1163/1163661.png"
+                             class="feature-icon" /> Weather
+                    </label>
                     <select asp-for="Weather_Condition" class="form-select">
                         <option>Sunny</option>
                         <option>Rainy</option>
@@ -105,27 +156,63 @@
                     </select>
                 </div>
 
-                <!-- Days to Harvest -->
+                <!-- Days -->
                 <div class="col-md-6">
-                    <label class="form-label fw-semibold">Days to Harvest</label>
+                    <label class="form-label fw-semibold">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1827/1827945.png"
+                             class="feature-icon" /> Days to Harvest
+                    </label>
                     <input asp-for="Days_to_Harvest" class="form-control" type="number" placeholder="Enter number of days" />
                 </div>
             </div>
 
             <div class="text-center mt-4">
-                <button type="submit" class="btn btn-success btn-lg px-4 shadow-sm">
-                    Predict Yield
-                </button>
+                <button class="btn btn-success btn-lg px-5 shadow-sm">🌿 Predict Yield</button>
             </div>
         </form>
     </div>
 
-    <!-- Prediction Result -->
-    @if (ViewBag.Result != null)
+    <!-- Prediction + Recommendations + Analysis Chart -->
+    @if (ViewBag.PredictedYield != null)
     {
-        <div class="mt-5 p-4 rounded-4 shadow-lg bg-light text-center">
-            <h3 class="fw-bold mb-3">Predicted Yield</h3>
-            <p class="fs-3 text-primary fw-bold">@ViewBag.Result</p>
+        <!-- Yield Result Card -->
+        <div class="mt-5 p-4 rounded-4 shadow-lg result-card">
+            <h3 class="fw-bold text-success">🌾 Predicted Yield</h3>
+            <p class="fs-2 fw-bold text-primary">@ViewBag.PredictedYield</p>
+
+            <h5 class="text-secondary">@ViewBag.YieldCategory</h5>
         </div>
+
+        <!-- Recommendations -->
+        <div class="mt-4 recommend-card">
+            <h4 class="fw-bold text-success mb-3">🌱 Recommendations for Better Yield</h4>
+
+            <ul class="fs-6">
+                @foreach (var item in (List<string>)ViewBag.Recommendations)
+                {
+                    <li>@item</li>
+                }
+            </ul>
+        </div>
+
+        <!-- Chart Section -->
+        <div class="mt-5 chart-container">
+            <h4 class="text-center fw-bold text-success mb-3">📊 Yield Analysis Chart</h4>
+            <canvas id="yieldChart"></canvas>
+        </div>
+
+        <script>
+            var ctx = document.getElementById('yieldChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Predicted Yield', 'Remaining Potential'],
+                    datasets: [{
+                        data: [@ViewBag.YieldValue, 7 - @ViewBag.YieldValue], // you can adjust max range
+                        backgroundColor: ['#4caf50', '#c8e6c9']
+                    }]
+                }
+            });
+        </script>
     }
 </div>

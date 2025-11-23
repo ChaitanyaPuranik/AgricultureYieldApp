@@ -4,14 +4,17 @@ using Frontend.Service;
 
 namespace Frontend.Controllers
 {
-
     public class YieldController : Controller
     {
         private readonly YieldPredictionService _predictor;
+        private readonly YieldRecommendationService _advisor;
 
-        public YieldController(YieldPredictionService predictor)
+        public YieldController(
+            YieldPredictionService predictor,
+            YieldRecommendationService advisor)
         {
             _predictor = predictor;
+            _advisor = advisor;
         }
 
         [HttpGet]
@@ -26,12 +29,22 @@ namespace Frontend.Controllers
             if (!ModelState.IsValid)
                 return View(input);
 
+            // 1. predict yield
             double predictedYield = await _predictor.PredictYieldAsync(input);
 
-            ViewBag.Result = $"{predictedYield:F2} tons/hectare";
+            // 2. return formatted result
+            ViewBag.PredictedYield = $"{predictedYield:F2} tons/hectare";
+
+            // 3. category (Good/Moderate/Low)
+            ViewBag.YieldCategory = _advisor.GetYieldCategory(predictedYield);
+
+            // 4. recommendations
+            ViewBag.Recommendations = _advisor.GetRecommendations(input);
+
+            // 5. for chart
+            ViewBag.YieldValue = predictedYield;
 
             return View(input);
         }
     }
-
 }
