@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Frontend.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Frontend.Controllers
@@ -13,6 +14,7 @@ namespace Frontend.Controllers
             _logger = logger;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             return View();
